@@ -12,8 +12,13 @@ preview() {
 filetype=$(file -Lb --mime-type "$file")
 
 case "${filetype}" in
-image/*) preview "$file" ;;
-text/*) cat "$file" ;;
-application/zip|application/x-tar|application/rar|application/gzip|x-7z-compressed) 7zz l "$file" ;;
+    image/*) preview "$file" ;;
+    text/*) cat "$file" ;;
+application/zip
+    |application/x-tar
+    |application/x-xz
+    |application/rar
+    |application/gzip
+    |x-7z-compressed) 7zz l "$file" ;;
 esac
 return 1
