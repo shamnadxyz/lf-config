@@ -55,7 +55,6 @@ cmd delete ${{
     [ "$ans" = "y" ] && rm -rf $fx
 }}
 
-
 # Mapping
 map D trash
 map R rename
