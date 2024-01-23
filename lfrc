@@ -18,6 +18,9 @@ cmd open &{{
     esac
 }}
 
+map o &mimeopen $f
+map O $mimeopen --ask $f
+
 cmd extract ${{
     printf "Directory Name: "
     read ans
@@ -26,8 +29,7 @@ cmd extract ${{
         *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
         *.tar.gz|*.tgz) tar xzvf $f;;
         *.tar.xz|*.txz) tar xJvf $f;;
-        *.zip) unzip $f;;
-        *.rar|*.tar|*.7z) mkdir $ans && 7zz x $f -o$ans;;
+        *.rar|*.tar|*.7z|*.zip) mkdir $ans && 7zz x $f -o$ans;;
     esac
 }}
 
