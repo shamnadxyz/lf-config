@@ -59,6 +59,7 @@ cmd delete ${{
 
 # Mapping
 map D trash
+map X delete
 map R rename
 map Q quit
 map q ;
