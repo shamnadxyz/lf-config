@@ -35,12 +35,6 @@ cmd extract ${{
 
 # Custom Functions
 
-cmd mkdir ${{
-    printf "Directory Name: "
-    read ans
-    mkdir $ans
-}}
-
 cmd trash ${{
     set -f
         printf "$fx\n"
@@ -57,10 +51,34 @@ cmd delete ${{
     [ "$ans" = "y" ] && rm -rf $fx
 }}
 
+cmd archiveToZip ${{
+    set -f
+        printf "$fx\n"
+        printf "archive to zip?[y/n]"
+        read ans
+        if [[ $ans = "y" ]] then
+        read -p "Archive name:" name
+        7zz a ${name}.zip -tzip $fx -mx=0
+        fi
+}}
+
+cmd archiveTo7zip ${{
+    set -f
+        printf "$fx\n"
+        printf "archive to 7zip?[y/n]"
+        read ans
+        if [[ $ans = "y" ]] then
+        read -p "Archive name:" name
+        7zz a ${name}.7z -t7z $fx
+        fi
+}}
+
 # Mapping
 map D trash
 map X delete
 map R rename
 map Q quit
+map az archiveToZip
+map a7 archiveTo7zip
 map q ;
 map r ;
