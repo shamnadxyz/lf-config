@@ -21,19 +21,24 @@ cmd open &{{
 map o &mimeopen $f
 map O $mimeopen --ask $f
 
-cmd extract ${{
-    printf "Directory Name: "
-    read ans
+cmd extractToDir ${{
+    read -p "Create new directory? [y/n] " newDir
+    read -p "Name: " dir
+    if [[ "$newDir" = "y" ]] then
+      mkdir "$dir"
+    fi
     set -f
     case $f in
-        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
-        *.tar.gz|*.tgz) tar xzvf $f;;
-        *.tar.xz|*.txz) tar xJvf $f;;
-        *.rar|*.tar|*.7z|*.zip) mkdir $ans && 7zz x $f -o$ans;;
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz|*.rar|*.tar|*.7z|*.zip) 7zz x $f -o$dir;;
     esac
 }}
 
-# Custom Functions
+cmd extract ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz|*.rar|*.tar|*.7z|*.zip) 7zz x $f ;;
+    esac
+}}
 
 cmd trash ${{
     set -f
@@ -80,5 +85,7 @@ map R rename
 map Q quit
 map az archiveToZip
 map a7 archiveTo7zip
+map ax extract
+map ad extractToDir
 map q ;
 map r ;
