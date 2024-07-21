@@ -1,4 +1,4 @@
-set shell sh
+set shell bash
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
@@ -10,13 +10,6 @@ set cleaner ~/.config/lf/clean
 
 # show the result of execution of previous commands
 map ` !true
-
-cmd open &{{
-    case $(file --mime-type -Lb $f) in
-        text/*) lf -remote "send $id \$$EDITOR \$fx";;
-        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
-    esac
-}}
 
 map o &mimeopen $f
 map O $mimeopen --ask $f
@@ -45,7 +38,7 @@ cmd trash ${{
         printf "$fx\n"
         printf "move to trash?[y/n]"
         read ans
-        [ "$ans" = "y" ] &&  mv $fx ~/.trash
+        [ "$ans" = "y" ] && mv $fx ~/.trash
 }}
 
 cmd delete ${{
